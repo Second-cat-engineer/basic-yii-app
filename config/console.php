@@ -28,13 +28,35 @@ $config = [
         'db'    => $db,
     ],
     'params'              => $params,
-    /*
+
     'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
+        'migrate-mysql'   => [
+            'class'          => 'yii\console\controllers\MigrateController',
+            'migrationPath'  => [
+                '@app/migrations/mysql',
+            ],
+            'migrationTable' => 'migration',
+        ],
+
+        // Menu migrations
+        'migrate-menu'    => [
+            'class'          => 'yii\console\controllers\MigrateController',
+            'migrationPath'  => [
+                '@app/migrations/menu',
+            ],
+            'migrationTable' => 'migration_menu',
+        ],
+
+        // RBAC migrations
+        'migrate-rbac'    => [
+            'class'          => 'yii\console\controllers\MigrateController',
+            'migrationPath'  => [
+                '@app/migrations/rbac',
+            ],
+            'migrationTable' => 'migration_rbac',
         ],
     ],
-    */
+
 ];
 
 if (YII_ENV_DEV) {

@@ -4,7 +4,10 @@ $params = require __DIR__ . '/params.php';
 $db     = require __DIR__ . '/db.php';
 
 $config = [
-    'id'         => 'basic',
+    'id'         => env('APP_ID'),
+    'name'       => env('APP_NAME'),
+    'timeZone'   => env('APP_TIME_ZONE'),
+    'language'   => env('APP_LANGUAGE'),
     'basePath'   => dirname(__DIR__),
     'bootstrap'  => ['log'],
     'aliases'    => [
@@ -14,7 +17,7 @@ $config = [
     'components' => [
         'request'      => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '5DGKkUD6fI5R7vpJGZBENp2wNBf3C6mD',
+            'cookieValidationKey' => env('COOKIE_VALIDATION_KEY'),
         ],
         'cache'        => [
             'class' => 'yii\caching\FileCache',
