@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  php:
+    container_name: php
+    image: yiisoftware/yii2-php:8.0-apache
+    restart: unless-stopped
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./:/app:delegated
+    ports:
+      - '8000:80'
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mysql_db_data:/var/lib/mysql
+    ports:
+      - '${MYSQL_PORT}:3306'
+    networks:
+      - app-network
+
+volumes:
+  mysql_db_data:
+
+networks:
+  app-network:
+    driver: bridge
