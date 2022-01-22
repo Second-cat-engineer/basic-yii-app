@@ -14,6 +14,9 @@ $config = [
         '@tests' => '@app/tests',
     ],
     'components'          => [
+        'authManager' => [
+            'class' => yii\rbac\DbManager::class,
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -34,6 +37,9 @@ $config = [
             'class'          => 'yii\console\controllers\MigrateController',
             'migrationPath'  => [
                 '@app/migrations/mysql',
+                '@yii/rbac/migrations',
+                __DIR__ . '/../vendor/mdmsoft/yii2-admin/migrations'
+//                '@mdm/admin/migrations',
             ],
             'migrationTable' => 'migration',
         ],
